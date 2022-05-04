@@ -19,11 +19,11 @@ local function php_fmt()
   local file_path = api.nvim_buf_get_name(buf_nr)
   local view = fn.winsaveview()
   local cmd = opts.cmd .. " --standard=" .. opts.standard .. " --encoding=utf8 " .. file_path
-  vim.fn.jobstart(cmd, {
+  fn.jobstart(cmd, {
     on_exit = function(_, code, _)
       if code == 0 or code == 1 then
-        vim.api.nvim_exec("edit", true)
-        vim.fn.winrestview(view)
+        api.nvim_exec("edit", true)
+        fn.winrestview(view)
       end
     end,
     on_stderr = function(_, data, _)
